@@ -1,0 +1,26 @@
+{
+  "$schema": "https://openapi.vercel.sh/microfrontends.json",
+  "version": "1",
+  "applications": {
+    "rembert.dev": {
+      "development": {
+        "fallback": "rembert.dev",
+        "local": 3000,
+        "task": "dev"
+      }
+    },
+    "personal-board": {
+      "routing": [
+        {
+          "paths": ["/board/:path*"]
+        }
+      ],
+      "development": {
+        "fallback": "personal-board.vercel.app"
+      }
+    }
+  },
+  "options": {
+    "localProxyPort": 3024
+  }
+}
