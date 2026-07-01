@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/microfrontends.json",
   "version": "1",
   "applications": {
-    "rembert.dev": {
+    "rembert-dev": {
       "development": {
         "fallback": "rembert.dev",
         "local": 3000,
