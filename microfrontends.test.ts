@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { validateRouting } from "@vercel/microfrontends/next/testing";
 
 type MicrofrontendsConfig = {
   applications: Record<
@@ -40,5 +41,12 @@ describe("microfrontends routing", () => {
     expect(config.applications["personal-board"].development).toMatchObject({
       fallback: "personal-board.vercel.app",
     });
+
+    expect(() =>
+      validateRouting("microfrontends.json", {
+        "rembert.dev": ["/"],
+        "personal-board": ["/board", "/board/settings"],
+      }),
+    ).not.toThrow();
   });
 });
