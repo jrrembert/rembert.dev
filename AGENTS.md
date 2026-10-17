@@ -47,6 +47,14 @@ After merging:
   as a blocking repository-state problem and recover the branch before
   continuing new feature work.
 
+## Pull Requests
+- Use `.github/PULL_REQUEST_TEMPLATE.md` for every PR body, including PRs
+  created with the CLI or an API.
+- Fill in the summary, verification, and review notes with task-specific
+  details. State when verification was not needed or a section has no notes.
+- For stacked PRs, keep the Stack section and list the PRs in merge order with
+  this PR's base branch. Remove the Stack section for unstacked PRs.
+
 ## Commands
 - Use commands documented in this repository.
 - There is currently no project build or test command documented.
