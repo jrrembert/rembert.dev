@@ -55,13 +55,13 @@
 ## Pull Requests
 
 - Use `.github/PULL_REQUEST_TEMPLATE.md` for every PR, including CLI/API creation.
-  Fill Summary, Verification, and Review notes with task-specific details;
-  explain skipped verification and write "None" when there are no review notes.
+  Fill What changed, Tested, and the Checklist with task-specific details.
+  Explain skipped checks, and remove Differs from the plan if no plan applies.
 - For stacked PRs, list the merge order and each PR's base in every PR body.
   Remove the Stack section for unstacked PRs.
 - For issues specified for closure, add one line per issue: `Closes #123`,
   `Closes owner/repo#123`, or `Closes TEAM-123` for Linear. Remove the Issues
-  section when none was specified.
+  section when none was specified; use a non-closing reference for related work.
 - Put GitHub closing lines in the PR targeting `main`; closing keywords require
   the default branch. Verify Linear status after merge because it depends on
   integration and workflow automation settings.
