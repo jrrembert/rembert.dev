@@ -1,14 +1,25 @@
-## Summary
-<!-- What changed and why? -->
+<!-- Title: "Phase N (k/m): <what this layer does>" -->
+Part of #N. <!-- On the top PR of the phase, write "Closes #N" instead. N is the issue number, the same as the phase number. -->
+Stack: <!-- "Bottom of the phase N stack" / "Stacked on #PR" / "Single PR" -->
 
-## Verification
-<!-- What did you run or inspect? Include results, or explain why verification was not needed. -->
+## What changed
+<!-- One bullet per change. Name the file, make target or resource. Say why when it isn't obvious. -->
+-
 
-## Review notes
-<!-- Note any risks, migrations, or follow-up work. Write "None" if there are none. -->
+## Differs from the plan
+<!-- Anything that changed from the phase spec or plan, and why. "None" is fine. -->
 
-## Issues (if applicable)
-<!-- If an issue should close on merge, add a separate line for each one: Closes #<number> (GitHub, same repo), Closes owner/repo#<number> (GitHub, other repo), or Closes TEAM-<number> (Linear). Replace placeholders with real IDs. Remove this section if no issue was specified. -->
+## Tested
+<!-- The commands you ran and what you saw. Real output and numbers, not "works". -->
+-
 
-## Stack (if applicable)
-<!-- List the PRs in merge order, bottom to top, and name this PR's base branch. Remove this section for an unstacked PR. -->
+## Checklist
+- [ ] Only used the lab's kubeconfig, `kind-consul` and `colima-consul`; `~/.kube/config`, the current Docker context and `local-k8s-poc` unchanged
+- [ ] New versions pinned by tag or digest; no `latest`
+- [ ] Setup targets (`make lab-up` etc.) still safe to re-run
+- [ ] `AGENTS.md` updated if commands or conventions changed
+
+### Top PR of the phase only
+- [ ] Learning notes in `docs/learning/NN-<slug>.md`, including how it differs on EKS
+- [ ] Rebuilt from scratch: `make lab-down`, then `make lab-up` and every later setup target
+- [ ] "What I learned" comment added on the issue
