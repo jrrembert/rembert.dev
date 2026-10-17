@@ -54,6 +54,14 @@ After merging:
   details. State when verification was not needed or a section has no notes.
 - For stacked PRs, keep the Stack section and list the PRs in merge order with
   this PR's base branch. Remove the Stack section for unstacked PRs.
+- If an issue was specified for closure, keep the Issues section and add a
+  separate closing line for each issue: `Closes #123` for a GitHub issue in
+  this repository, `Closes owner/repo#123` for another repository, or
+  `Closes TEAM-123` for a Linear issue. Remove the section if none was specified.
+- GitHub closing keywords in a PR body work only when the PR targets the
+  default branch. For a stack, put the GitHub closing line in the PR that
+  targets `main`. Linear issue status changes depend on its GitHub integration
+  and workflow automation settings; verify the final status after merge.
 
 ## Commands
 - Use commands documented in this repository.
