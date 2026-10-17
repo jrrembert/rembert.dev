@@ -1,193 +1,67 @@
 # AGENTS.md
 
-## Project Instructions
-- This repository contains the source for `rembert.dev`.
-- Keep changes scoped to the user request.
+## Project And Scope
+
+- This repository contains the Next.js source for `rembert.dev`; use Bun.
+- Keep changes scoped to the user request and preserve unrelated user changes.
+  Do not overwrite or revert them without explicit confirmation.
 - Do not add application scaffolding, new services, or external providers unless
-  the user asks for them explicitly.
-
-## Branching And Merge Rules
-All implementation work intended to ship must become reachable from
-`origin/main`. A pull request merged into another feature branch is not shipped
-until that feature branch, or a later branch containing it, is merged into
-`main`.
-
-Before starting work:
-- Create implementation branches from the current `origin/main` unless the task
-  intentionally uses a stacked PR.
-- If using stacked PRs, write the stack order in each PR body and set each PR
-  base to the previous branch in the stack.
-- Keep one focused task per branch unless the work explicitly requires coupled
-  changes.
-
-When merging stacked PRs:
-- Merge from the bottom of the stack upward.
-- After each lower PR merges, retarget the next PR to `main` or confirm GitHub
-  can rebase it cleanly onto the newly merged base.
-- Do not treat work as shipped just because its PR merged into a non-main
-  branch. Treat it as shipped only after its commit is reachable from
-  `origin/main`, or after a main-targeting integration PR containing it is open
-  and clearly tracked.
-
-Before deleting branches or cleaning worktrees:
-- Run `git fetch origin`.
-- Confirm every important branch tip is reachable from `origin/main` with
-  `git merge-base --is-ancestor <branch-or-sha> origin/main`.
-- If a branch tip is not reachable from `origin/main`, either merge/retarget the
-  PR chain first or create and push a protected recovery branch at that tip.
-- Check `git worktree list` before deleting or renaming branches. Git worktrees
-  can keep branches checked out outside the current directory.
-- Never delete local or remote feature branches that contain unmerged work unless
-  the user explicitly confirms the commits are intentionally abandoned.
-
-After merging:
-- Run `git fetch origin` and verify the expected commits are ancestors of
-  `origin/main`.
-- If merged work appears done but its code is not in `origin/main`, treat that
-  as a blocking repository-state problem and recover the branch before
-  continuing new feature work.
-
-## Pull Requests
-- Use `.github/PULL_REQUEST_TEMPLATE.md` for every PR body, including PRs
-  created with the CLI or an API.
-- Fill in the summary, verification, and review notes with task-specific
-  details. State when verification was not needed or a section has no notes.
-- For stacked PRs, keep the Stack section and list the PRs in merge order with
-  this PR's base branch. Remove the Stack section for unstacked PRs.
-- If an issue was specified for closure, keep the Issues section and add a
-  separate closing line for each issue: `Closes #123` for a GitHub issue in
-  this repository, `Closes owner/repo#123` for another repository, or
-  `Closes TEAM-123` for a Linear issue. Remove the section if none was specified.
-- GitHub closing keywords in a PR body work only when the PR targets the
-  default branch. For a stack, put the GitHub closing line in the PR that
-  targets `main`. Linear issue status changes depend on its GitHub integration
-  and workflow automation settings; verify the final status after merge.
+  explicitly requested. Ask before adding scheduled jobs, local asset uploads,
+  or analytics unless the request already authorizes them.
+- Never commit credentials, secrets, private user data, or production
+  environment values.
 
 ## Commands
-- Use commands documented in this repository.
-- There is currently no project build or test command documented.
+
+- Development: `bun run dev`
+- Tests: `bun run test`
+- Type checking: `bun run typecheck`
+- Production build: `bun run build`
 - For documentation-only changes, inspect the diff before committing.
-- In local Codex sessions, `rtk` may be used as an optional shell-command
-  wrapper when available; it is not a project dependency.
 
-## Development Rules
-- Use test-driven development for behavior changes.
-- Write failing tests before implementing new logic.
-- Prefer small domain services with typed inputs and explicit dependencies.
+## Development
+
+- For behavior changes, write a failing test before implementing the change.
 - Keep shared application constants in root-level `constants.ts`.
-- Preserve unrelated user changes. Do not overwrite or revert them without
-  explicit confirmation.
 
-## Security Boundaries
-Never commit:
-- API keys or access tokens.
-- OAuth client secrets.
-- Database URLs.
-- Encryption keys.
-- Real private user data.
-- Production environment values.
+## Branches And Integration
 
-Ask before:
-- Adding a new external provider.
-- Changing the database provider.
-- Adding scheduled jobs, local asset uploads, analytics, or multi-owner support.
+- Create implementation branches from freshly fetched `origin/main`, except
+  for intentional stacked PRs. Keep one focused task per branch.
+- Treat work as integrated only after its changes reach `origin/main`.
+  An open integration PR tracks pending work; it does not complete integration.
+- For stacked PRs, base each PR on the preceding branch and merge bottom-up.
+  After each merge, retarget the next PR to `main` and resolve any conflicts
+  or changes introduced by squash or rebase merges before continuing.
+- After merging, fetch origin and verify the resulting merge, squash, or
+  rebased commit is reachable from `origin/main` and contains the intended changes.
+  If expected changes are missing, preserve the source branch and resolve the
+  integration problem before starting new feature work.
+- Before deleting or renaming branches or cleaning worktrees, fetch origin
+  and check `git worktree list`. Verify all work being removed is integrated into
+  `origin/main`; original commit ancestry alone is insufficient after squash
+  or rebase merges. Keep branches or worktrees intact if verification is uncertain.
+- Never delete local or remote branches containing unmerged work unless the user
+  explicitly confirms it is intentionally abandoned.
 
-## Git Commit Standards
-Use clear, focused commits. Each commit should represent one complete logical
-change, leave the repository in a working state, and be easy to review or revert
-independently.
+## Pull Requests
 
-### Commit Message Format
-Prefer this format:
+- Use `.github/PULL_REQUEST_TEMPLATE.md` for every PR, including CLI/API creation.
+  Fill Summary, Verification, and Review notes with task-specific details;
+  explain skipped verification and write "None" when there are no review notes.
+- For stacked PRs, list the merge order and each PR's base in every PR body.
+  Remove the Stack section for unstacked PRs.
+- For issues specified for closure, add one line per issue: `Closes #123`,
+  `Closes owner/repo#123`, or `Closes TEAM-123` for Linear. Remove the Issues
+  section when none was specified.
+- Put GitHub closing lines in the PR targeting `main`; closing keywords require
+  the default branch. Verify Linear status after merge because it depends on
+  integration and workflow automation settings.
 
-```text
-<type>(<scope>): <imperative summary>
+## Commits
 
-<optional body explaining why the change was needed, important implementation details, risks, migrations, or follow-ups>
-
-<optional footer with issue links or breaking-change notes>
-```
-
-Examples:
-
-```text
-fix(site): correct homepage asset path
-feat(site): add project index page
-docs(readme): document local setup
-test(site): cover navigation rendering
-refactor(styles): simplify layout spacing
-chore(deps): update eslint config
-```
-
-Write the summary in imperative mood, as if completing:
-
-```text
-When applied, this commit will...
-```
-
-Good:
-
-```text
-Add image preload hints to the homepage
-Fix homepage asset loading
-Remove unused style rule
-```
-
-Avoid vague or mixed-purpose messages:
-
-```text
-fix stuff
-updates
-changes
-WIP
-bugfix
-fix homepage bug, rename component, update navbar styling, add tests
-```
-
-### Commit Scope And Content
-Each commit should do one coherent thing. Atomic does not mean tiny; it means
-focused and complete.
-
-A good commit:
-- Does one thing.
-- Can be reviewed independently.
-- Can be reverted without undoing unrelated work.
-- Leaves the codebase working.
-- Has a clear message.
-
-Prefer separate commits for unrelated work:
-
-```text
-fix(site): correct homepage asset path
-refactor(styles): rename shared spacing token
-style(nav): adjust navbar spacing
-test(site): cover homepage rendering
-```
-
-When practical, split cleanup, fixes, features, dependency updates, generated
-files, and formatting into separate commits.
-
-A useful test:
-
-```text
-Could this commit be explained in one sentence without using "and"?
-```
-
-If not, split it.
-
-If changes must be coupled because of tooling or dependency constraints, make
-that clear in the commit message.
-
-### Message Body Guidelines
-The first line should be short, specific, and readable in Git history.
-
-For non-trivial changes, add a body that explains why the change was made, not
-just what files changed. The diff already shows what changed.
-
-Include context when relevant:
-- Problem being solved.
-- Reason this approach was chosen.
-- Tradeoffs or risks.
-- Migration notes.
-- Breaking changes.
-- Related issues or tickets.
+- Keep commits focused, independently reviewable, and working. Include the
+  implementation and its tests together; separate unrelated changes.
+- Prefer `<type>(<scope>): <imperative summary>`,
+  e.g. `fix(site): correct homepage asset path`.
+- For non-trivial changes, explain the reason and material tradeoffs in the body.
