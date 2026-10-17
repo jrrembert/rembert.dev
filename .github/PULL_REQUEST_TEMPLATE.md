@@ -1,25 +1,23 @@
-<!-- Title: "Phase N (k/m): <what this layer does>" -->
-Part of #N. <!-- On the top PR of the phase, write "Closes #N" instead. N is the issue number, the same as the phase number. -->
-Stack: <!-- "Bottom of the phase N stack" / "Stacked on #PR" / "Single PR" -->
+<!-- Title: <type>(<scope>): <imperative summary> -->
 
 ## What changed
-<!-- One bullet per change. Name the file, make target or resource. Say why when it isn't obvious. -->
+<!-- One bullet per change. Name the file or behavior and explain why when it is not obvious. -->
 -
 
-## Differs from the plan
-<!-- Anything that changed from the phase spec or plan, and why. "None" is fine. -->
+## Differs from the plan (if applicable)
+<!-- Describe changes from the agreed plan and why. Remove this section if there was no plan. -->
 
 ## Tested
-<!-- The commands you ran and what you saw. Real output and numbers, not "works". -->
+<!-- List commands or checks and their results. For code changes, consider bun run test, bun run typecheck, and bun run build. Explain any relevant checks not run. -->
 -
 
-## Checklist
-- [ ] Only used the lab's kubeconfig, `kind-consul` and `colima-consul`; `~/.kube/config`, the current Docker context and `local-k8s-poc` unchanged
-- [ ] New versions pinned by tag or digest; no `latest`
-- [ ] Setup targets (`make lab-up` etc.) still safe to re-run
-- [ ] `AGENTS.md` updated if commands or conventions changed
+## Issues (if applicable)
+<!-- If an issue was specified for closure, add a separate line per issue: Closes #<number> (GitHub, same repo), Closes owner/repo#<number> (GitHub, other repo), or Closes TEAM-<number> (Linear). Replace placeholders with real IDs. Remove this section if no issue was specified. -->
 
-### Top PR of the phase only
-- [ ] Learning notes in `docs/learning/NN-<slug>.md`, including how it differs on EKS
-- [ ] Rebuilt from scratch: `make lab-down`, then `make lab-up` and every later setup target
-- [ ] "What I learned" comment added on the issue
+## Stack (if applicable)
+<!-- List PRs in merge order, bottom to top, with each PR's base branch. Remove this section for an unstacked PR. -->
+
+## Checklist
+- [ ] Changes are scoped to this PR and contain no secrets or private data.
+- [ ] Relevant checks and results are recorded above, or the reason they were not run.
+- [ ] `AGENTS.md` is updated if repository commands or conventions changed (or not applicable).
