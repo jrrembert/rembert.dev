@@ -24,8 +24,10 @@
 - For behavior changes, write a failing test before implementing the change.
 - Keep shared application constants in root-level `constants.ts`.
 
-## Branches And Integration
+## Worktrees And Integration
 
+- Use a dedicated Git worktree for implementation work. Reuse a suitable
+  worktree for the same task; keep unrelated work in separate worktrees.
 - Create implementation branches from freshly fetched `origin/main`, except
   for intentional stacked PRs. Keep one focused task per branch.
 - Treat work as integrated only after its changes reach `origin/main`.
@@ -41,6 +43,12 @@
   and check `git worktree list`. Verify all work being removed is integrated into
   `origin/main`; original commit ancestry alone is insufficient after squash
   or rebase merges. Keep branches or worktrees intact if verification is uncertain.
+- After a PR is merged into `main` and its worktree is no longer needed,
+  perform the integration checks above, confirm the worktree has no uncommitted
+  or untracked work, then remove it and delete its local and remote task branches.
+  Keep worktrees or branches still needed by another task or stacked PR.
+  Use Codex worktree archival for Codex-managed worktrees; otherwise use
+  `git worktree remove`. Never force removal or discard user work.
 - Never delete local or remote branches containing unmerged work unless the user
   explicitly confirms it is intentionally abandoned.
 
