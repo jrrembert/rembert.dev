@@ -6,10 +6,11 @@ const nextConfig: NextConfig = {
   async rewrites() {
     const origin = process.env.TEST_APP_ORIGIN ?? TEST_APP_ORIGIN;
     return [
-      { source: "/test/:path*", destination: `${origin}/test/:path*` },
+      { source: "/test", destination: `${origin}/test` },
+      { source: "/test/:path+", destination: `${origin}/test/:path+` },
       {
-        source: `${TEST_APP_ASSET_PREFIX}/:path*`,
-        destination: `${origin}${TEST_APP_ASSET_PREFIX}/:path*`,
+        source: `${TEST_APP_ASSET_PREFIX}/:path+`,
+        destination: `${origin}${TEST_APP_ASSET_PREFIX}/:path+`,
       },
     ];
   },
