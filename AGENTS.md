@@ -17,6 +17,8 @@
 - Tests: `bun run test`
 - Type checking: `bun run typecheck`
 - Production build: `bun run build`
+- Test child app: `bun run dev:test`; run `bun run dev:proxy` and visit `/test` on port 3024.
+- Check the child app separately: `bun run --cwd apps/test typecheck` and `bun run --cwd apps/test build`.
 - For documentation-only changes, inspect the diff before committing.
 
 ## Development
