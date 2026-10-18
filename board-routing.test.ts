@@ -35,7 +35,9 @@ describe("board zone routing", () => {
         url: "https://www.rembert.dev/board/login",
         nextConfig,
       });
-      expect(getRewrittenUrl(response)).toBe("https://board-preview.example.com/board/login");
+      expect(getRewrittenUrl(response)).toBe(
+        "https://board-preview.example.com/board/login",
+      );
       for (const path of ["/", "/boardroom", "/vc-ap-e198da-other"]) {
         const unrelated = await unstable_getResponseFromNextConfig({
           url: `https://www.rembert.dev${path}`,

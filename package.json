@@ -9,6 +9,7 @@
     "build": "next build",
     "start": "next start",
     "test": "bun test",
+    "verify:routing": "bun run scripts/verify-routing.ts",
     "typecheck": "next typegen && tsc --noEmit"
   },
   "dependencies": {

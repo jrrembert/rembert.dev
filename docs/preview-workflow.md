@@ -37,13 +37,22 @@ intended project explicitly and use its short-lived development identity:
 ```bash
 bunx vercel link --project rembert.dev --scope joseph-remberts-projects --yes
 bunx vercel env run --project rembert.dev --scope joseph-remberts-projects -- \
-  bun /absolute/path/to/your-preview-check.mjs
+  bun run verify:routing -- https://YOUR-GATEWAY-PREVIEW.vercel.app --authenticated
 ```
 
-The check should read `VERCEL_OIDC_TOKEN` from its environment and send it as
-`x-vercel-trusted-oidc-idp-token` only to the intended gateway preview origin.
-Never print or commit the token. A child preview needs that child's own project
-identity. This requires no shareable access link and does not weaken protection.
+The checked-in smoke script sends `VERCEL_OIDC_TOKEN` as
+`x-vercel-trusted-oidc-idp-token` only to this gateway's team-scoped preview hosts.
+It follows no redirects and prints no token or response bodies. A child preview
+needs that child's own project identity. This requires no shareable access link
+and does not weaken protection. The script checks public pages, asset responses,
+anonymous guards, auth metadata/session/CSRF endpoints, and retired root paths;
+it never submits login emails or mutates subscribers.
+
+For a public or local gateway, omit authentication:
+
+```bash
+bun run verify:routing -- http://localhost:3101
+```
 
 ## Local board composition and existing flow suite
 

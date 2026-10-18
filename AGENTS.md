@@ -15,6 +15,7 @@
 
 - Development: `bun run dev`
 - Tests: `bun run test`
+- Read-only routing smoke checks: `bun run verify:routing -- <origin>`; see the preview guide for authenticated checks.
 - Type checking: `bun run typecheck`
 - Production build: `bun run build`
 - Test child app: `bun run dev:test`; run the gateway with `TEST_APP_ORIGIN=http://localhost:3001 bun run dev` and visit `/test` on port 3000.
