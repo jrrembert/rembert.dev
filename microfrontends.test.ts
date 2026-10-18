@@ -23,6 +23,7 @@ describe("microfrontends routing", () => {
 
     expect(Object.keys(config.applications)).toEqual([
       "rembert.dev",
+      "rembert-test",
       "personal-board",
     ]);
 
@@ -46,6 +47,21 @@ describe("microfrontends routing", () => {
       validateRouting("microfrontends.json", {
         "rembert.dev": ["/"],
         "personal-board": ["/board", "/board/settings"],
+      }),
+    ).not.toThrow();
+  });
+
+  test("routes the test path and its assets to the test microfrontend", () => {
+    expect(() =>
+      validateRouting("microfrontends.json", {
+        "rembert.dev": ["/", "/testing"],
+        "personal-board": ["/board", "/board/settings"],
+        "rembert-test": [
+          "/test",
+          "/test/",
+          "/test/nested",
+          "/test-assets/_next/static/chunk.js",
+        ],
       }),
     ).not.toThrow();
   });
