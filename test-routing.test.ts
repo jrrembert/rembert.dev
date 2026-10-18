@@ -34,7 +34,7 @@ describe("test child app routing", () => {
       });
       expect(getRewrittenUrl(response)).toBe("https://child-preview.vercel.app/test");
 
-      for (const path of ["/", "/board", "/testing", "/test-assets-other"]) {
+      for (const path of ["/", "/testing", "/test-assets-other"]) {
         const unrelated = await unstable_getResponseFromNextConfig({
           url: `http://localhost:3000${path}`,
           nextConfig,

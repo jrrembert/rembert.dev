@@ -20,12 +20,12 @@ describe("Vercel deployment", () => {
     expect(config.installCommand).toBe("bun install");
   });
 
-  test("wires the Next.js app into Vercel microfrontends", async () => {
+  test("uses standard Next.js rewrites without the managed routing SDK", async () => {
     const packageJson = (await Bun.file("package.json").json()) as PackageJson;
     const nextConfig = await readFile("next.config.ts", "utf8");
 
-    expect(packageJson.dependencies).toHaveProperty("@vercel/microfrontends");
-    expect(nextConfig).toContain("@vercel/microfrontends/next/config");
-    expect(nextConfig).toContain("withMicrofrontends");
+    expect(packageJson.dependencies).not.toHaveProperty("@vercel/microfrontends");
+    expect(nextConfig).not.toContain("withMicrofrontends");
+    expect(nextConfig).toContain("async rewrites()");
   });
 });
