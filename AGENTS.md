@@ -15,10 +15,12 @@
 
 - Development: `bun run dev`
 - Tests: `bun run test`
+- Read-only routing smoke checks: `bun run verify:routing -- <origin>`; see the preview guide for authenticated checks.
 - Type checking: `bun run typecheck`
 - Production build: `bun run build`
-- Test child app: `bun run dev:test`; run the default app with `TEST_APP_ORIGIN=http://localhost:3001 bun run dev`, then `bun run dev:proxy` and visit `/test` on port 3024.
+- Test child app: `bun run dev:test`; run the gateway with `TEST_APP_ORIGIN=http://localhost:3001 bun run dev` and visit `/test` on port 3000.
 - Check the child app separately: `bun run --cwd apps/test typecheck` and `bun run --cwd apps/test build`.
+- Board and composed preview verification: follow `docs/preview-workflow.md`; use fixture data and fake Gmail for mutating flow tests.
 - For documentation-only changes, inspect the diff before committing.
 
 ## Development

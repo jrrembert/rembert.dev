@@ -6,15 +6,14 @@
   "scripts": {
     "dev": "next dev",
     "dev:test": "bun run --cwd apps/test dev",
-    "dev:proxy": "microfrontends proxy microfrontends.json --local-apps rembert.dev",
     "build": "next build",
     "start": "next start",
     "test": "bun test",
+    "verify:routing": "bun run scripts/verify-routing.ts",
     "typecheck": "next typegen && tsc --noEmit"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
-    "@vercel/microfrontends": "^2.3.6",
     "next": "16.3.8",
     "react": "19.2.7",
     "react-dom": "19.2.7"
