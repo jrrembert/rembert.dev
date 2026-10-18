@@ -1,6 +1,8 @@
-import { withMicrofrontends } from "@vercel/microfrontends/next/config";
 import type { NextConfig } from "next";
+import { TEST_APP_ASSET_PREFIX } from "../../constants";
 
-const nextConfig: NextConfig = {};
+const nextConfig: NextConfig = {
+  assetPrefix: TEST_APP_ASSET_PREFIX,
+};
 
-export default withMicrofrontends(nextConfig);
+export default nextConfig;

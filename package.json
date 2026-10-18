@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "dev:test": "bun run --cwd apps/test dev",
-    "dev:proxy": "microfrontends proxy microfrontends.json --local-apps rembert.dev rembert-test",
+    "dev:proxy": "microfrontends proxy microfrontends.json --local-apps rembert.dev",
     "build": "next build",
     "start": "next start",
     "test": "bun test",
