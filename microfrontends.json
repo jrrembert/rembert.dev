@@ -9,19 +9,6 @@
         "task": "dev"
       }
     },
-    "rembert-test": {
-      "assetPrefix": "test-assets",
-      "routing": [
-        {
-          "paths": ["/test/:path*", "/test-assets/:path*"]
-        }
-      ],
-      "development": {
-        "fallback": "rembert-test.vercel.app",
-        "local": 3001,
-        "task": "dev"
-      }
-    },
     "personal-board": {
       "routing": [
         {
