@@ -8,16 +8,6 @@
         "local": 3000,
         "task": "dev"
       }
-    },
-    "personal-board": {
-      "routing": [
-        {
-          "paths": ["/board/:path*"]
-        }
-      ],
-      "development": {
-        "fallback": "personal-board.vercel.app"
-      }
     }
   },
   "options": {
